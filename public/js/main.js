@@ -16,7 +16,6 @@
 })(jQuery);
 
 $(document).ready(function () {
-    console.log(fetchUrl());
     history.pushState(null, null, fetchUrl());
 }).on('click', '#generate', function (e) {
     e.preventDefault();
