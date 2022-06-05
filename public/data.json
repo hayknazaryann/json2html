@@ -1,0 +1,52 @@
+{
+  "items":[
+    {
+      "title":"Item 1",
+      "type":"array",
+      "items":[
+        {
+          "title":"Item 1-1",
+          "type":"array",
+          "items":[
+            {
+              "title":"Item 1-1-1",
+              "type":"array"
+            }
+          ]
+        },
+        {
+          "title":"Item 1-2",
+          "type":"string"
+        }
+      ]
+    },
+    {
+      "title":"Item 2",
+      "type":"array",
+      "items":[
+        {
+          "title":"Item 2-1",
+          "type":"string"
+        },
+        {
+          "title":"Item 2-2",
+          "type":"string",
+          "items":[
+            {
+              "title":"Item 2-2-1",
+              "type":"array"
+            }
+          ]
+        },
+        {
+          "title":"Item 2-3",
+          "type":"string"
+        }
+      ]
+    },
+    {
+      "title":"Item 3",
+      "type":"string"
+    }
+  ]
+}

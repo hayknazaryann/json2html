@@ -1,0 +1,15 @@
+p.item-title{
+    cursor: pointer;
+}
+
+ul{
+    list-style-type: none;
+}
+
+.is-invalid {
+    border: 1px solid red;
+}
+
+.invalid-feedback {
+    color: red;
+}
