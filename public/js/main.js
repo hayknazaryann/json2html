@@ -36,8 +36,18 @@ $(document).ready(function () {
         contentType: false,
         cache: false,
     }).done(function (response) {
-        $('div#list').html(response.html);
-        $('ul.list').not('.child').attr("style", response.background);
+        if (response.success === true){
+            $('div#list').html(response.html);
+            if (response.background != ''){
+                $('ul.list').not('.child').attr("style", response.background);
+            }
+            form.find('input[type="text"], input[type="file"], input[type="number"], textarea').removeClass('is-invalid');
+            $('#msg').text('');
+        } else {
+            $('div#list').html('');
+            $('#msg').text(response.msg);
+        }
+
     }).fail(error => {
         if (error.status === 422) {
             let response = JSON.parse(error.responseText),
@@ -47,11 +57,10 @@ $(document).ready(function () {
                 let input_name = $(input).attr('name'),
                     exist = $(input).closest('div.form-item').find('.invalid-feedback');
 
-
-                console.log(errors);
                 if(input_name in errors){
                     $(input).addClass('is-invalid');
                     let error = errors[input_name];
+                    console.log(error);
                     if (exist.length < 1) {
                         $(input).closest('.form-item').append($(`<div class="invalid-feedback d-block">${error}</div>`));
                     } else {

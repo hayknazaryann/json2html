@@ -28,10 +28,18 @@ class ListsController extends Controller
             $list = json_decode($contents, true);
             $validated = $this->validateJson($list);
             if ($validated){
+                $depth = $this->array_depth($list);
+                $req_depth = $request->depth;
+                if ($req_depth > $depth){
+                    return response()->json(['success' => false, 'msg' => 'Wrong depth']);
+                }
                 $items = $list['items'];
-                $background = $request->has('background_url') ? "background-image: url(" . $request->background_url . ")" : ($request->has('background_color') ? "background-color: rgb" . $request->background_color : "");
-                $items_html = view('lists.partials.items',compact('items','background'))->render();
+                $background = $request->background_url && $request->has('background_url') ? "background-image: url(" . $request->background_url . ")" : ($request->has('background_color') && $request->background_color ? "background-color: rgb" . $request->background_color : "");
+                $n = 1;
+                $items_html = view('lists.partials.items',compact('items','background','n', 'req_depth'))->render();
                 return response()->json(['success' => true,'html' => $items_html, 'background' => $background]);
+            }else{
+                return response()->json(['success' => false, 'msg' => 'Invalid format']);
             }
         }
 
@@ -57,8 +65,15 @@ class ListsController extends Controller
         return $validated;
     }
 
-    public function renderList($items){
-
+    private function array_depth($json_data)
+    {
+        $max_depth = 1;
+        foreach ($json_data['items'] as $item) {
+            if (array_key_exists('items', $item)) {
+                $max_depth = $this->array_depth($item) + 1;
+            }
+        }
+        return $max_depth;
     }
 
     public function loadInputs(Request $request){

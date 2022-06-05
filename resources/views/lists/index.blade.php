@@ -7,8 +7,12 @@
                 <div class="card">
                     <div class="card-header">{{ __('Generate List') }}</div>
                     <div class="card-body">
+
                         <div class="row">
+
                             <div class="col-md-6">
+                                <p id="msg" class="text-center text-danger"></p>
+
                                 <form method="POST" id="generate-list" action="{{ route('list.generate') }}" data-load-inputs-url="{{route('load.inputs')}}">
                                     @csrf
                                     <div class="row justify-content-center mb-3">
@@ -60,7 +64,7 @@
 
                                     <div class="row justify-content-center mb-3">
                                         <label for="depth" class="col-form-label text-md-center">{{ __('Depth') }}</label>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 form-item">
                                             <input type="number" class="form-control" name="depth" placeholder="Depth" min="1" value="1"/>
                                         </div>
                                     </div>

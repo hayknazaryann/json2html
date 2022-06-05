@@ -33,10 +33,12 @@ class GenerateListRequest extends FormRequest
         }
 
         if ($data['background_input_type'] == 'url'){
-            $rules['background_url'] = 'required|url';
+            $rules['background_url'] = 'url';
         }elseif ($data['background_input_type'] == 'rgb'){
-            $rules['background_color'] = 'required|regex:/\((?:\s*\d+\s*,){2}\s*[\d]+\)/i';
+            $rules['background_color'] = 'nullable|regex:/\((?:\s*\d+\s*,){2}\s*[\d]+\)/i';
         }
+
+        $rules['depth'] = "numeric|min:1";
 
         return $rules;
     }
