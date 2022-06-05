@@ -18,8 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function (){
-    Route::get('/', [\App\Http\Controllers\ListsController::class, 'index']);
-    Route::get('/home', [App\Http\Controllers\ListsController::class, 'index'])->name('home');
-    Route::post('list/generate', [\App\Http\Controllers\ListsController::class,'generateList'])->name('list.generate');
+    Route::get('/', function (){
+        return redirect('/generate/list');
+    });
+    Route::match(['GET', 'POST'],'/generate/list', [\App\Http\Controllers\ListsController::class,'generateList'])->name('list.generate');
     Route::post('load/inputs', [\App\Http\Controllers\ListsController::class,'loadInputs'])->name('load.inputs');
 });

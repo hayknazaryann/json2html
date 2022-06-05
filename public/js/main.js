@@ -16,14 +16,16 @@
 })(jQuery);
 
 $(document).ready(function () {
-    $('input.json-input-type').trigger('change');
-    $('input.background-input-type').trigger('change');
+    console.log(fetchUrl());
+    history.pushState(null, null, fetchUrl());
 }).on('click', '#generate', function (e) {
     e.preventDefault();
     let $this = $(this),
         form = $this.closest('form'),
         url = form.attr('action'),
         data = form.serializeWithFiles();
+
+    history.pushState(null, null, fetchUrl());
 
     $.ajax({
         method:"POST",
@@ -109,4 +111,10 @@ function loadInputs(property,type) {
     }).fail(function (response) {
 
     })
+}
+
+function fetchUrl() {
+    let depth = $('input#depth').val(),
+        background = $('input#background-url').length ? $('input#background-url').val() : $('input#background-color').val();
+        return window.location.pathname+'?background='+background + '&depth=' + depth;
 }

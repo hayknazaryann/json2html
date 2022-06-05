@@ -35,6 +35,7 @@
                                         </div>
                                     </div>
                                     <div class="row justify-content-center mb-3" id="json-input-row">
+                                        @include('lists.partials.json-input',['type' => $json_input_type])
                                     </div>
 
                                     <div class="row justify-content-center mb-3">
@@ -59,13 +60,14 @@
 
 
                                     <div class="row justify-content-center mb-3" id="background-input-row">
+                                        @include('lists.partials.background-input',['type' => $background_input_type])
                                     </div>
 
 
                                     <div class="row justify-content-center mb-3">
                                         <label for="depth" class="col-form-label text-md-center">{{ __('Depth') }}</label>
                                         <div class="col-md-4 form-item">
-                                            <input type="number" class="form-control" name="depth" placeholder="Depth" min="1" value="1"/>
+                                            <input type="number" class="form-control" name="depth" id="depth" placeholder="Depth" min="1" value="{{request()->has('depth') ? request()->get('depth') : 1}}"/>
                                         </div>
                                     </div>
 

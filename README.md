@@ -10,6 +10,8 @@
 7. php artisan migrate --seed
 8. php artisan optimize:clear
 
+In public folder there is example of json file 
+
 ## Test User
 email: test-admin@admin.com
 password: as23XAa234a
